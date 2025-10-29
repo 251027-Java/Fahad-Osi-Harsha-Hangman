@@ -1,5 +1,9 @@
 public class Hangman{
     public static void main(String[] args){
-        System.out.println("Testing");
+        String word = "";
+        string guess ="";
+
+        Scanner Input = new Scanner(System.in);
+
     }
 }
