@@ -9,24 +9,29 @@ public class Hangman{
         Scanner Input = new Scanner(System.in);
         System.out.println("Enter guess word: ");
         String word = Input.nextLine();
+        boolean wordGuessed = false;
+        int correctGuessesCount = 0;
 
         int lives = 6;
-
-        for (int i = 0; i < word.length(); i++){
+        while(lives != 0) {
             System.out.println("Word length is: " + word.length());
             System.out.println("Enter your guess: ");
             char guess = Input.next().charAt(0);
-            if (lives == 0) {
-                System.out.println("Game Over!");
-                break;
-            }
-            if (word.charAt(i) == guess){
-                System.out.println("Guess correct!");
-            } else {
-                System.out.println("Guess wrong!");
-                lives--;
-                System.out.println("Lives left:" + lives);
+            for (int i = 0; i < word.length(); i++) {
+                if (word.charAt(i) == guess) {
+                    System.out.println("Guess correct!");
+                    correctGuessesCount = word.length()-1;
+                    if(correctGuessesCount == 0){
+                        System.out.println("YOU GUESSED THE WORD!!");
+                        break;
+                    }
+                } else {
+                    System.out.println("Guess wrong!");
+                    lives--;
+                    System.out.println("Lives left:" + lives);
+                }
             }
         }
+        if(wordGuessed =)
     }
 }
