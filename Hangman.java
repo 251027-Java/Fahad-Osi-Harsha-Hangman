@@ -2,6 +2,8 @@ import java.util.Scanner;
 
 public class Hangman{
     public static void main(String[] args){
+      
+    IO.println("test");
        // char guess = '';
 
         Scanner Input = new Scanner(System.in);
@@ -26,6 +28,5 @@ public class Hangman{
                 System.out.println("Lives left:" + lives);
             }
         }
-
     }
 }
