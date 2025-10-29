@@ -13,7 +13,7 @@ public class Hangman{
         int correctGuessesCount = 0;
 
         int lives = 6;
-        while(lives != 0) {
+        while((lives != 0) || (wordGuessed = false)) {
             System.out.println("Word length is: " + word.length());
             System.out.println("Enter your guess: ");
             char guess = Input.next().charAt(0);
@@ -22,13 +22,15 @@ public class Hangman{
                     System.out.println("Guess correct!");
                     correctGuessesCount = word.length()-1;
                     if(correctGuessesCount == 0){
-                        System.out.println("YOU GUESSED THE WORD!!");
-                        break;
+                        System.out.println("YOU GUESSED THE WORD!");
+                        wordGuessed = true;
                     }
+                    break;
                 } else {
                     System.out.println("Guess wrong!");
                     lives--;
                     System.out.println("Lives left:" + lives);
+                    break;
                 }
             }
         }
