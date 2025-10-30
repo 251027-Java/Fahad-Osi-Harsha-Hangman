@@ -11,10 +11,12 @@ public class Hangman {
         System.out.println("A random word has been selected!");
 
         boolean wordGuessed = false;
-        int correctGuessesCountp = word.length();
+        int correctGuessesCount = word.length();
         boolean correctLetter = false;
         boolean[] revealed = new boolean[word.length()];
         int lives = 6;
+        boolean invalidInput = true;
+
 
         while (lives > 0 && !wordGuessed) {
             correctLetter = false;
@@ -23,27 +25,44 @@ public class Hangman {
             System.out.println("Lives left: " + lives);
             System.out.println("Word length is: " + word.length());
             System.out.println("Word so far: " + render(word, revealed));
-            System.out.print("Enter your guess: ");
-            char guess = Input.next().charAt(0);
 
-            for (int i = 0; i < word.length(); i++) {
-                if (word.charAt(i) == guess && !revealed[i]) {
-                    revealed[i] = true;
-                    correctLetter = true;
-                    System.out.println("Guess correct!");
-                    correctGuessesCount--;
+            try {
+                System.out.print("Enter your guess: ");
+                String input = Input.next();
+                if (input.length() != 1) {
+                    throw new IllegalArgumentException("Please enter only one letter");
                 }
-            }
+                char guess = input.charAt(0);
+                if (!Character.isLetter(guess) ) {
+                    throw new IllegalArgumentException("Only use letters! Nothing else is allowed.");
+                }
 
-            if (correctGuessesCount == 0) {
-                wordGuessed = true;
-                System.out.println("\n YOU GUESSED THE WORD! It was: " + word);
-                break;
-            }
+                System.out.print("Enter your guess: ");
 
-            if (!correctLetter) {
-                System.out.println("Guess wrong!");
-                lives--;
+                for (int i = 0; i < word.length(); i++) {
+                    if (word.charAt(i) == guess && !revealed[i]) {
+                        revealed[i] = true;
+                        correctLetter = true;
+                        System.out.println("Guess correct!");
+                        correctGuessesCount--;
+                    }
+                }
+
+                if (correctGuessesCount == 0) {
+                    wordGuessed = true;
+                    System.out.println("\n YOU GUESSED THE WORD! It was: " + word);
+                    break;
+                }
+
+                if (!correctLetter) {
+                    System.out.println("Guess wrong!");
+                    lives--;
+                }
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            } catch (Exception e) {
+                System.out.println("Invalid input. Please try again");
+                Input.nextLine();
             }
         }
 
