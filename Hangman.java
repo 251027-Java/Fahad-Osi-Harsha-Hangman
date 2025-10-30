@@ -15,6 +15,7 @@ public class Hangman {
         boolean correctLetter = false;
         boolean[] revealed = new boolean[word.length()];
         int lives = 6;
+
         boolean invalidInput = true;
 
 
@@ -25,6 +26,7 @@ public class Hangman {
             System.out.println("Lives left: " + lives);
             System.out.println("Word length is: " + word.length());
             System.out.println("Word so far: " + render(word, revealed));
+
 
             try {
                 System.out.print("Enter your guess: ");
@@ -52,7 +54,20 @@ public class Hangman {
                     wordGuessed = true;
                     System.out.println("\n YOU GUESSED THE WORD! It was: " + word);
                     break;
+
+            System.out.print("Enter your guess: ");
+            char guess = Input.next().charAt(0);
+
+            for (int i = 0; i < word.length(); i++) {
+                if (word.charAt(i) == guess && !revealed[i]) {
+                    revealed[i] = true;
+                    correctLetter = true;
+                    System.out.println("Guess correct!");
+                    correctGuessesCount--;
+
                 }
+            }
+
 
                 if (!correctLetter) {
                     System.out.println("Guess wrong!");
@@ -79,7 +94,36 @@ public class Hangman {
                 result = result + word.charAt(i);   // show the letter/ adds letter
             } else {
                 result = result + "_";              // hide with underscore/ adds _
+
+            if (correctGuessesCount == 0) {
+                wordGuessed = true;
+                System.out.println("\n YOU GUESSED THE WORD! It was: " + word);
+                break;
             }
+
+            if (!correctLetter) {
+                System.out.println("Guess wrong!");
+                lives--;
+
+            }
+        }
+
+        if (!wordGuessed) {
+            System.out.println("\n GAME OVER! The word was: " + word);
+        }
+    }
+
+    private static String render(String word, boolean[] revealed) {
+        String result = "";
+
+
+        for (int i = 0; i < word.length(); i++) {
+            if (revealed[i]) {
+                result = result + word.charAt(i);   // show the letter/ adds letter
+            } else {
+                result = result + "_";              // hide with underscore/ adds _
+            }
+
 
             if (i < word.length() - 1) {
                 result = result + " ";              // add a space between letters; not last letter yet, add a space
