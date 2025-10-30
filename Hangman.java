@@ -10,7 +10,7 @@ public class Hangman{
         System.out.println("Enter guess word: ");
         String word = Input.nextLine();
         boolean wordGuessed = false;
-        int correctGuessesCount = word.length();
+        int correctGuessesCountp = word.length();
         boolean correctLetter = false;
 
         int lives = 6;
